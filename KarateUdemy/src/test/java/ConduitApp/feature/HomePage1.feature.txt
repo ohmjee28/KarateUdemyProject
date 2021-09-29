@@ -1,0 +1,26 @@
+Feature: Tests for Conduit Home Page
+
+  Scenario: Get All tags from Conduit Home page
+
+    Given url 'https://conduit.productionready.io/api/tags'
+    When method Get
+    Then status 200
+
+  Scenario: Get atleast 10 records from the Page
+    Given url 'https://conduit.productionready.io/api/articles?limit=10&offset=0'
+    When method Get
+    Then status 200
+
+#Parameter in URL for Get Request
+  Scenario Outline: Get Atleast 10 records from the page and use param in Given format
+    Given url 'https://conduit.productionready.io/api/articles'
+    Given params {limit:<limit>,offset:0}
+    When method Get
+    Then status 200
+
+    Examples:
+    |limit|
+    |  11 |
+    |  12 |
+    |  13 |
+
